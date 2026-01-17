@@ -15,15 +15,7 @@ const createMovieInfo = function({title, desc, img, release, rating}){
 }
 
 const initialState =  {
-    watchlist: [
-        {
-            title: "Interstellar",
-            img: "https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-            director: "Nolan",
-            cast: ["Mathew McConaughey", "Harry Styles"],
-            genre: "Science-Fiction",
-        }
-    ],
+    watchlist: [],
     newReleases: []
 }
 
@@ -34,7 +26,11 @@ const watchlistSlice = createSlice({
         refreshPopulars: (state, action) => {
             state.newReleases = action.payload
         },
-        addMovie:  (state, actions) =>{ state.watchlist.push(actions.payload)},
+        addMovie:  (state, actions) =>{
+            if (!state.watchlist.some(item => item.id == actions.payload.id)){
+                state.watchlist.push(actions.payload)
+            }
+        },
         delMovie: (state, actions) => {
             state.watchlist = state.watchlist.filter(movie => movie.id !== actions.payload)
         }

@@ -16,21 +16,16 @@ export default function Navbar() {
         {/* CENTER — Links (desktop) */}
         <ul className="hidden md:flex mx-auto items-center space-x-8">
           <li>
-            <a className="text-green-400 font-medium">Home</a>
+            <a className="cursor-pointer text-green-400 font-medium">Home</a>
           </li>
           <li>
-            <a className="text-gray-400 hover:text-green-400 transition">
-              Features
+            <a className="cursor-pointer text-gray-400 hover:text-green-400 transition">
+              My watchlist
             </a>
           </li>
           <li>
-            <a className="text-gray-400 hover:text-green-400 transition">
-              Pricing
-            </a>
-          </li>
-          <li>
-            <a className="text-gray-400 hover:text-green-400 transition">
-              Contact
+            <a className="cursor-pointer text-gray-400 hover:text-green-400 transition">
+              About
             </a>
           </li>
         </ul>
