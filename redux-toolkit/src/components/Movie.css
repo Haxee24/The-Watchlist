@@ -6,6 +6,12 @@
     height: 350px;
     border-radius: 10px;
     overflow: hidden;
+    flex-shrink: 0;
+}
+
+.inline-test{
+    display: inline-flex !important;
+    outline: 3px solid red;
 }
 
 .img{

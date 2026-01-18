@@ -15,7 +15,13 @@ const createMovieInfo = function({title, desc, img, release, rating}){
 }
 
 const initialState =  {
-    watchlist: [],
+    watchlist: (() => {
+                try {
+                    return JSON.parse(localStorage.getItem("watchlist"))
+                } catch {
+                    return [];
+                }
+            })(),
     newReleases: []
 }
 
@@ -27,7 +33,7 @@ const watchlistSlice = createSlice({
             state.newReleases = action.payload
         },
         addMovie:  (state, actions) =>{
-            if (!state.watchlist.some(item => item.id == actions.payload.id)){
+            if (!state.watchlist.some(item => (item.title === actions.payload.title && item.release === actions.payload.release))){
                 state.watchlist.push(actions.payload)
             }
         },

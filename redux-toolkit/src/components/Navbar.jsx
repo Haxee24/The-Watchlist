@@ -1,5 +1,6 @@
 import { useState } from "react"
 import MovieForm from "./movieForm"
+import { Link, NavLink } from "react-router-dom"
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -16,17 +17,17 @@ export default function Navbar() {
         {/* CENTER — Links (desktop) */}
         <ul className="hidden md:flex mx-auto items-center space-x-8">
           <li>
-            <a className="cursor-pointer text-green-400 font-medium">Home</a>
+            <NavLink to="/" className={({isActive}) => `cursor-pointer ${isActive?"text-green-400":"text-gray-400"} hover:text-green-400 transition`}>Home</NavLink>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-400 hover:text-green-400 transition">
+            <NavLink to="/watchlist" className={({isActive}) => `cursor-pointer ${isActive?"text-green-400":"text-gray-400"} hover:text-green-400 transition`}>
               My watchlist
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a className="cursor-pointer text-gray-400 hover:text-green-400 transition">
+            <NavLink to="/about" className={({isActive}) => `cursor-pointer ${isActive?"text-green-400":"text-gray-400"} hover:text-green-400 transition`}>
               About
-            </a>
+            </NavLink>
           </li>
         </ul>
 
@@ -48,11 +49,44 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden px-6 pb-4 space-y-4">
           <ul className="flex flex-col items-center gap-4 text-gray-400">
-            <li className="text-green-400 cursor-pointer font-medium">Home</li>
-            <li className="hover:text-green-400 cursor-pointer transition">Features</li>
-            <li className="hover:text-green-400 cursor-pointer transition">Pricing</li>
-            <li className="hover:text-green-400 cursor-pointer transition">Contact</li>
-            <MovieForm />
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `cursor-pointer font-medium transition ${
+                      isActive ? "text-green-400" : "text-gray-400 hover:text-green-400"
+                    }`
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/watchlist"
+                  className={({ isActive }) =>
+                    `cursor-pointer transition ${
+                      isActive ? "text-green-400" : "text-gray-400 hover:text-green-400"
+                    }`
+                  }
+                >
+                  Watchlist
+                </NavLink>
+              </li>
+
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `cursor-pointer transition ${
+                    isActive ? "text-green-400" : "text-gray-400 hover:text-green-400"
+                  }`
+                }
+              >
+                About
+              </NavLink>
+            </li><MovieForm />
           </ul>
         </div>
       )}

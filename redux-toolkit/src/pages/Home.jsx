@@ -27,7 +27,7 @@ export default function Home(){
     return (
         <div className='flex flex-col items-center'>
             <h1>Popular Releases</h1>
-            <div className='inline-flex flex-wrap gap-4 md:max-w-[70%] max-w-[90%] '>
+            <div className='inline-flex mx-auto flex-wrap gap-4 md:max-w-[70%] max-w-[90%] '>
             {movies.map(movie => <Movie key={movie.id} movie={movie}/>)}
             </div>
         </div>
