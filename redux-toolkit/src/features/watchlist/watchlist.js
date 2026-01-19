@@ -22,7 +22,8 @@ const initialState =  {
                     return [];
                 }
             })(),
-    newReleases: []
+    newReleases: [],
+    searchResults: [],
 }
 
 const watchlistSlice = createSlice({
@@ -39,10 +40,13 @@ const watchlistSlice = createSlice({
         },
         delMovie: (state, actions) => {
             state.watchlist = state.watchlist.filter(movie => movie.id !== actions.payload)
+        },
+        doSearch: (state, actions) => {
+            state.searchResults = actions.payload
         }
     }
 })
 
-export const {refreshPopulars, addMovie, delMovie} = watchlistSlice.actions;
+export const {refreshPopulars, addMovie, delMovie, doSearch} = watchlistSlice.actions;
 export default watchlistSlice.reducer;
 

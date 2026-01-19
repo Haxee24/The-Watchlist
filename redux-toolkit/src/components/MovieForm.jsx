@@ -1,15 +1,34 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { addMovie } from "../features/watchlist/watchlist"
+import { doSearch } from "../features/watchlist/watchlist"
+import { searchMovies } from "../services/tmdb/moviesApi"
+import { useNavigate } from "react-router-dom"
 
-export default function MovieForm({big}) {
+export default function MovieForm() {
+  const navigate = useNavigate();
   const [movie, setMovie] = useState("")
   const dispatch = useDispatch()
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!movie.trim()) return
-    dispatch(addMovie(movie))
+    e.preventDefault();
+    async function fetchSearchResults(query){
+      try{
+        let results = await searchMovies(query);
+        results = results.map(movie => ({
+          id: movie.id,
+          title: movie.title,
+          release: movie.release_date,
+          img: movie.poster_path,
+          desc: movie.overview,
+          rating: movie.adult ? "R" : "PG-13"
+        }))
+        dispatch(doSearch(results));
+        navigate("/search");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchSearchResults(movie);
     setMovie("")
   }
 

@@ -3,7 +3,7 @@ import { getPopularMovies } from '../services/tmdb/moviesApi';
 import { refreshPopulars } from '../features/watchlist/watchlist';
 import { useEffect } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import Movie from '../components/Movie';
+import Showcase from '../components/Showcase';
 
 export default function Home(){
 
@@ -25,11 +25,10 @@ export default function Home(){
     }, [])
 
     return (
-        <div className='flex flex-col items-center'>
-            <h1>Popular Releases</h1>
-            <div className='inline-flex mx-auto flex-wrap gap-4 md:max-w-[70%] max-w-[90%] '>
-            {movies.map(movie => <Movie key={movie.id} movie={movie}/>)}
-            </div>
+        <div className='text-center'>
+            <h1 className="text-3xl font-bold mb-4">Popular Releases</h1>
+            <Showcase movies={movies} free={true} />
         </div>
+        
     )
 }
